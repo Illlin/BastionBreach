@@ -607,7 +607,7 @@ def online_multiplayer(user_name):
             i, n = menu(["Download", "Refuse"], header = title + "An Update is available")
             if not i:
                 print("Downloading")
-                download_code(github_url, file_name
+                download_code(github_url, file_name)
                 text("Your game is now up to date, Please re-launch the application")
                 return True
             else:
