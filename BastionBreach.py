@@ -14,7 +14,7 @@ from msvcrt import getch
 from msvcrt import kbhit
 
 # Defining variables
-
+github_url = "https://raw.githubusercontent.com/Illlin/BastionBreach/master/BastionBreach.py"
 suit = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]  # Cards in a suit
 progress = [b"\r", b" "]  # Keys to trigger text moving
 punctuation = [".", "!", ",", "?"]
@@ -51,6 +51,12 @@ title = """
 
 def clear():  # Clear screen
     os.system("cls")
+
+
+def download_code(url, file):
+    with open(file, "w") as code:
+        code.write(urllib.request.urlopen(url).read().decode("utf8"))
+
 
 
 def text(words, char_time=0.04, break_time=0.2, pause=True, end="\n", fast="0"):  # Scrolling text
@@ -589,6 +595,24 @@ def online_multiplayer(user_name):
             server_list.append([string[j], string[j + 1]])
         return server_list
 
+    def check_for_update(soc):
+        print("Checking for update")
+        soc.send("Update Check".encode("utf8"))
+        soc.send(version.encode("utf8"))
+        update = soc.recv(1024).decode("utf8")
+        if update == "Up To Date":
+            print("Your game version is up to date")
+            return True
+        else:
+            i, n = menu(["Download", "Refuse"], header = title + "An Update is available")
+            if not i:
+                print("Downloading")
+                download_code(github_url, file_name
+                text("Your game is now up to date, Please re-launch the application")
+                return True
+            else:
+                return False
+
     def online_game(soc, there_name, your_name):
         def draw(oppon, scr, you_name):
             clear()
@@ -623,7 +647,6 @@ def online_multiplayer(user_name):
                         valid = True
                 if not valid:
                     text("That is not a valid move")
-            print(choice)
             print("Waiting for opponent to make a move")
             client_socket.send(choice.encode("utf8"))
             move = client_socket.recv(1024).decode("utf8")
@@ -672,6 +695,10 @@ def online_multiplayer(user_name):
             raise ConnectionError
 
         if connect:
+            update = check_for_update(client_socket)
+            if not update():
+                text("Sorry, your game version does not match that of the server.")
+                return()
             name_list = ["Host New Server\n\n    ####Games to Join####", "Refresh\n"]
             for i in servers:
                 name_list.append(i[1])
