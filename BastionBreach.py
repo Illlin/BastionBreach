@@ -696,7 +696,7 @@ def online_multiplayer(user_name):
 
         if connect:
             update = check_for_update(client_socket)
-            if not update():
+            if not update:
                 text("Sorry, your game version does not match that of the server.")
                 return()
             name_list = ["Host New Server\n\n    ####Games to Join####", "Refresh\n"]
