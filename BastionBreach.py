@@ -23,8 +23,8 @@ file_name = "BastionBreach.py"
 version = "2.0"
 
 try:
-    print("♠♥♦♣")  # Test terminal support
-    symbols = [" ", "♠", "♥", "♦", "♣"]
+    print("\u2660\u2665\u2666\u2663")  # Test terminal support
+    symbols = [" ", "\u2660", "\u2665", "\u2666", "\u2663"]
 except (UnicodeEncodeError, UnicodeDecodeError, UnicodeError, UnicodeTranslateError, UnicodeWarning, ):
     symbols = [" "]*5
 
