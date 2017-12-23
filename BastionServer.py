@@ -16,14 +16,6 @@ import time
 version = "2.0"
 log_file = "Server_Log.txt"
 # ---- Defining functions ----
-def md5(fname):  # Makes MD5 Checksum to validate downloaded files
-    hash_md5 = hashlib.md5()
-    with open(fname, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
-
-
 def log(text):
     try:
         text = str(text)
@@ -131,6 +123,13 @@ def client_thread(address, client_socket):
 
             elif to_do == "Update Check":
                 log(data + " Checking for update")
+                user_version = client_socket.recv(1024).decode("utf8")
+                if user_version == version:
+                    client_socket.send("Up To Date".encode("utf8"))
+                    log(data + " Up to date")
+                else:
+                    log(data + " Updating code")
+                    client_socket.send("Update Now".encode("utf8"))
 
             else:
                 try:

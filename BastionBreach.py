@@ -43,7 +43,7 @@ title = """
  | |_) | __ _ ___| |_ _  ___  _ __   | |_) |_ __ ___  __ _  ___| |__
  |  _ < / _` / __| __| |/ _ \| '_ \  |  _ <| '__/ _ \/ _` |/ __| '_ \ 
  | |_) | (_| \__ \ |_| | (_) | | | | | |_) | | |  __/ (_| | (__| | | |
- |____/ \__,_|___/\__|_|\___/|_| |_| |____/|_|  \___|\__,_|\___|_| |_| V""" + version + "\n----Python Edition----"
+ |____/ \__,_|___/\__|_|\___/|_| |_| |____/|_|  \___|\__,_|\___|_| |_| V""" + version + "\n ----Python Edition----\n\n"
 
 
 # Defining Functions
@@ -609,7 +609,7 @@ def online_multiplayer(user_name):
                 print("Downloading")
                 download_code(github_url, file_name)
                 text("Your game is now up to date, Please re-launch the application")
-                return True
+                return False
             else:
                 return False
 
@@ -762,7 +762,7 @@ while True:
         name = ""
         number, join = menu(["Online: " + str(settings["Server URL"]), "Offline"])
         if number == 0:
-            #ip, null = menu(["Join " + settings["Server URL"], "Join Via IP"], header=title + "---- Server Option ----\n")
+            # ip, null = menu(["Join " + settings["Server URL"], "Join Via IP"], header=title + "---- Server Option ----\n")
             ip = 0
             while name == "":
                 clear()
